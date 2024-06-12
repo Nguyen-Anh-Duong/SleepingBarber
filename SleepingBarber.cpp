@@ -40,6 +40,7 @@ void* customer(void* arg) {
     while (1) {
         //Bao ve ghe de chi co mot khach hang duoc ngoi vao ghe
         pthread_mutex_lock(&Seats);
+        printf("Customer arrive\n");
         if (FreeSeats > 0) {
             // ngoi xuong
             FreeSeats--;
@@ -60,7 +61,7 @@ void* customer(void* arg) {
             // Giai phong mutex
             pthread_mutex_unlock(&Seats);
             // Khach hang roi di
-            printf("Customer leaves.\n");
+            printf("No chair. Customer leaves.\n");
         }
 //        sleep(10);
         sleep(rand() % 5); // Gia lap thoi gian giua cac khach hang
@@ -68,7 +69,6 @@ void* customer(void* arg) {
 }
 
 int main() {
-	srand(time(0));
     pthread_t barberThread;
     pthread_t customerThreads[10];
 
@@ -100,4 +100,3 @@ int main() {
     
     return 0;
 }
-
